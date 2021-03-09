@@ -1,0 +1,112 @@
+Prob: Given an array of integers, return a new array such that each element at index i of the new array is the product of all the numbers in the original array except the one at i.
+
+For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120, 60, 40, 30, 24]. If our input was [3, 2, 1], the expected output would be [2, 3, 6].
+
+
+
+Solution :
+
+function aryTransform(input) {
+  return input.map((el, index, ary) => {
+    const everything = ary.reduce((acc, curr) => {
+      return acc * curr
+    })
+    return everything / el
+  })
+}
+
+console.log(aryTransform([1,2,3,4,5]))  //[ 120, 60, 40, 30, 24 ]
+console.log(aryTransform([3,2,1]))  //[ 2, 3, 6 ]
+
+===========================================================================================================
+
+2) Unique key in given array 
+
+const getNonDuplicatedValues = (arr) => 
+    arr.filter((item,index) => {
+      arr.splice(index,1)
+      const unique = !arr.includes(item)
+      arr.splice(index,0,item)
+      return unique
+  })
+
+console.log("Non duplicated values: " , getNonDuplicatedValues([1,2,3,-1,3,2,4,'ashish','ashish']))
+
+===========================================================================================================
+
+
+3) Get DUBLICATE ARRAY 
+
+function getDuplicateArrayElements(arr){
+    var sorted_arr = arr.slice().sort();
+    var results = [];
+    for (var i = 0; i < sorted_arr.length - 1; i++) {
+        if (sorted_arr[i + 1] === sorted_arr[i]) {
+            results.push(sorted_arr[i]);
+        }
+    }
+    return results;
+}
+
+var colors = [1,2,3,-1,3,2,4,'ashish','ashish']
+var duplicateColors= getDuplicateArrayElements(colors);
+console.log(duplicateColors)// ['ashish',3,2]
+
+========================================================================================================
+3) Given a list of non negative integers, arrange them such that they form the largest number.
+	
+	var largestNumber = function(nums) {
+    let arr = nums.map(num => String(num));
+    arr.sort((a, b) => (b + a) - (a + b));
+    
+    return arr[0] === '0' ? '0' : arr.join('');
+	};
+
+console.log(largestNumber([3 , 6, 2, 56, 32, 5, 89, 32]));
+output : 896565332322
+
+
+========================================================================================================
+
+4) Find the contiguous subarray within an array, A of length N which has the largest sum.
+
+	var maxSequence = function(arr){
+	
+
+	  var curr_max = 0, max_so_far = 0;
+	
+
+	  for(var i = 0; i < arr.length; i++){  
+	    curr_max = Math.max(0, curr_max + arr[i]);
+	    max_so_far = Math.max(curr_max, max_so_far);
+	  }
+	  return max_so_far;
+	}
+	
+
+	console.log(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // returns 6 : [4, -1, 2, 1]
+
+====================================================================================================
+
+5. Find the shortest possible string which can create a string to make it a palindrome by adding characters to the end of it
+function build_Palindrome(new_str) {
+  var flag;
+  for (var i = new_str.length;; i++) {
+    flag = true;
+    for (var j = 0; j < i - j - 1; j++) {
+      if (i - j - 1 < new_str.length && new_str[j] != new_str[i - j - 1]) {
+        flag = false;
+        break;
+      }
+    }
+    if (flag) {
+      for (var j = new_str.length; j < i; j++) {
+        new_str += new_str[i - j - 1];
+      }
+      return new_str;
+    }
+  }
+}
+
+
+
